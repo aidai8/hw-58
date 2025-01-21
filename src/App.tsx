@@ -2,6 +2,7 @@ import './App.css'
 import Button from "./components/UI/Button/Button.tsx";
 import Modal, {ButtonConfig} from "./components/UI/Modal/Modal.tsx";
 import {useState} from "react";
+import Alert from "./components/UI/Alert/Alert.tsx";
 
 const App = () => {
 
@@ -26,10 +27,16 @@ const App = () => {
         },
     ];
 
+    const [showAlert, setShowAlert] = useState(true);
+
+    const closeAlert = () => {
+        setShowAlert(false);
+    };
+
   return (
       <>
-          <div className="container">
-              <h1 className="m-5 p-1">Level 1</h1>
+          <div className="container mt-4">
+              <h1>Level 1</h1>
               <Button
                   text='Show Modal'
                   color='primary'
@@ -44,6 +51,16 @@ const App = () => {
               >
                   Helloooo!!
               </Modal>
+          </div>
+
+          <div className="container mt-4">
+              <h1>Level 2</h1>
+              {showAlert && (
+                  <Alert type="warning" onDismiss={closeAlert}>
+                      This is a warning type alert
+                  </Alert>
+              )}
+              <Alert type="success">This is a success type alert</Alert>
           </div>
       </>
   )
